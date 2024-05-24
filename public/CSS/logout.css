@@ -1,0 +1,27 @@
+#Screen_logout {
+    text-align: center;
+    margin: 50px auto;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    max-width: 400px;
+    background-color: #f9f9f9;
+}
+
+#Screen_logout h1 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#Screen_logout p {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+#Screen_logout img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+}

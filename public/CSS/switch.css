@@ -1,0 +1,81 @@
+/* CSS cho switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 240px;  /* Tăng kích thước để chứa chữ */
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 4px;
+    left: 60px;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px; /* Làm tròn các góc */
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    top: 2px;
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%; /* Làm tròn nút */
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(146px); /* Tăng khoảng cách chuyển động */
+}
+
+.switch-text {
+    position: absolute;
+    width: 50%;
+    text-align: center;
+    line-height: 34px;
+    color: white;
+    font-weight: bold;
+    transition: .4s;
+    font-size: 14px; /* Tăng kích thước chữ */
+}
+
+.switch-text.on {
+    left: 0;
+}
+
+.switch-text.off {
+    right: 0;
+}
+
+input:checked + .slider .switch-text.on {
+    display: block;
+}
+
+input:checked + .slider .switch-text.off {
+    display: none;
+}
+
+input:not(:checked) + .slider .switch-text.on {
+    display: none;
+}
+
+input:not(:checked) + .slider .switch-text.off {
+    display: block;
+}

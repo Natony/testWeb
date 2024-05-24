@@ -1,0 +1,46 @@
+#banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    left: 207px;
+    border: 2px solid black;
+    padding: 10px;
+    width: 1278px;
+}
+
+.image-wrapper {
+    margin-right: 100px;
+}
+
+.image-wrapper img {
+    width: 800px; 
+    height: auto; 
+}
+
+.text-wrapper {
+    border-left: 2px solid black;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.text-wrapper h1,
+.text-wrapper h2 {
+    margin: 0;
+}
+
+.text-wrapper h1 {
+    font-size: 36px;
+    color: #ff0000;
+    text-align: center;
+}
+
+.text-wrapper h2 {
+    font-size: 28px;
+    text-align: center;
+}
+
+.content {
+    margin: 0;
+}

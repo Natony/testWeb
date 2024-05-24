@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<!-- Phần Header của Website -->
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ////////////// GỌI CÁC CSS //////////////  -->
+    <link rel="stylesheet" href="CSS/login.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/banner.css">
+    <link rel="stylesheet" href="CSS/slidebar.css">
+    <link rel="stylesheet" href="CSS/screen_main.css">
+    <link rel="stylesheet" href="CSS/screen_1.css">
+    <link rel="stylesheet" href="CSS/screen_2.css">
+    <link rel="stylesheet" href="CSS/screen_3.css">
+    <link rel="stylesheet" href="CSS/screen_4.css">
+    <link rel="stylesheet" href="CSS/switch.css">
+    <link rel="stylesheet" href="CSS/logout.css">
+    <!-- ////////////// CHƯƠNG TRÌNH HỆ THỐNG //////////////  -->
+    <title>Scada hệ thống giám sát trên internet</title>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/plotly-2.8.3.min.js"></script>
+    <script src="js/FileSaver.js"></script>
+    <script src="js/FC1_Common.js"></script>
+    <script src="js/FC2_ScreenMain.js"></script>
+    <script src="js/FC3_Screen1.js"></script>
+    <script src="js/FC4_Screen2.js"></script>
+    <script src="js/FC5_UserManagement.js"></script>
+    <script src="js/FC6_Screen3.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
+    <script>
+        var socket = io("localhost:3000") // IP tĩnh (hoặc IP động, hoặc localhost)
+        
+    </script>
+    <!-- ////////////// CHƯƠNG TRÌNH ĐĂNG NHẬP HỆ THỐNG //////////////  -->
+    <style>
+        #Screen_Main, #Screen_1, #Screen_2, #Screen_3, #Screen_4, #Screen_logout {
+            visibility: hidden;
+        }
+        
+        .active {
+            display: visible;
+        }
+    </style>
+    <div id="div_login">
+        <div id="id01" class="modal">
+            <form id="modal-content1" class="modal-content animate">
+                <div id="img_c  ontainer" class="imgcontainer">
+                    <span id="closebtt" onclick="document.getElementById('id01').style.display='none'; logout(); "
+                        class="close" title="Close Modal">&times;</span>
+                    <img decoding="async" id="img_avatar" src="images/user.jpg" alt="Avatar" class="avatar">
+                </div>
+
+                <div id="log_container" class="container">
+                    <label for="uname"><b>Username</b></label>
+                    <input id="inputuser" type="text" placeholder="Enter Username" name="uname" required>
+
+                    <label for="psw"><b>Password</b></label>
+                    <input id="inputpass" type="password" placeholder="Enter Password" name="psw" required>
+
+                    <button id="bttlogin1" type="button" onclick="login();">Login</button>
+                    <label>
+                        <input type="checkbox" checked="checked" name="remember"> Remember me
+                    </label>
+                </div>
+
+                <div id="login_container" class="container" style="background-color:#f1f1f1">
+                    <button id="bttcancle" type="button"
+                        onclick="document.getElementById('id01').style.display='none'; logout();"
+                        class="cancelbtn">Cancel</button>
+                    <span id="psw" class="psw">Forgot <a href="#">password?</a></span>
+                </div>
+            </form>
+        </div>
+    </div>    
+</head>
+
+<!-- Phần thân của website -->
+
+<body>
+    <!-- ////////////// Code cho slidebar////////////// -->
+    <div id="slidebar">
+        <!--Nút đăng nhập/đăng xuất-->
+        <div class="menu">
+            <img src="images/menu.png" alt="menu">
+        </div>
+        <button id="bttLogin" class="btn" onclick="login();window.location.reload();">
+            <i class="fas fa-sign-in-alt"></i> 
+            <span class="button-text"> Login</span>
+        </button>
+        <button id="bttLogout" class="btn" onclick="logout();">
+            <i class="fas fa-sign-out-alt"></i> 
+            <span class="button-text"> Logout</span>
+        </button>
+        <!--Nút chọn màn hình chính-->
+        <button id="btt_Screen_Main" onclick="fn_ScreenChange('Screen_Main', 'Screen_1', 'Screen_2', 'Screen_3', 'Screen_4', 'Screen_logout');">
+            <i class="fas fa-home"></i> 
+            <span class="button-text"> Home</span>
+        </button>
+        <!--Nút chọn màn hình 1-->
+        <button id="btt_Screen_1" onclick="fn_ScreenChange('Screen_1', 'Screen_Main', 'Screen_2', 'Screen_3', 'Screen_4', 'Screen_logout');">
+            <i class="fas fa-tv"></i> 
+            <span class="button-text"> Control</span>L
+        </button>
+        <!--Nút chọn màn hình 2-->
+        <button id="btt_Screen_2" onclick="fn_ScreenChange('Screen_2', 'Screen_Main', 'Screen_1', 'Screen_3', 'Screen_4', 'Screen_logout');fn_Table01_SQL_Show();">
+            <i class="fas fa-table"></i> 
+            <span class="button-text"> Dashboard</span>
+        </button>
+        <!--Nút chọn màn hình 3-->
+        <button id="btt_Screen_3" onclick="fn_ScreenChange('Screen_3', 'Screen_Main', 'Screen_1', 'Screen_2', 'Screen_4', 'Screen_logout');fn_Table02_SQL_Show();">
+            <i class="fas fa-bell"></i> 
+            <span class="button-text"> Alarm</span>
+        </button>
+        <!--Nút chọn màn hình 4-->
+        <button id="btt_Screen_4" onclick="fn_ScreenChange('Screen_4', 'Screen_Main', 'Screen_1', 'Screen_2', 'Screen_3', 'Screen_logout');">
+            <i class="fas fa-chart-line"></i> 
+            <span class="button-text"> Trend</span>
+        </button>
+    </div>
+    <div id="banner">
+        <div class="image-wrapper">
+            <img src="images/Banner0.png" alt="banner">
+        </div>
+        <div class="text-wrapper">
+            <h1>WEBSITE GIÁM SÁT</h1>
+            <h2>Ổn định áp suất</h2>
+        </div>
+    </div>
+    <!-- //////////////Code  cho màn hình chính////////////// -->
+    <div id="Screen_Main">
+        <h3>GIỚI THIỆU</h3>
+    </div>
+    <!-- //////////////Code cho màn hình 1////////////// -->
+    <div id="Screen_1" > 
+        <div id="screen_Control">
+            <img src="images/screen_Control.png">
+            <img id="Pipe_1">
+            <script>fn_SymbolStatus("Pipe_1", "Pipe1", "WebSite_Start_Ivt");</script>
+            <img id="Pipe_2">
+            <script>fn_SymbolStatus("Pipe_2", "Pipe2", "WebSite_Start_Ivt");</script>
+            <img id="Pipe_3">
+            <script>fn_SymbolStatus("Pipe_3", "Pipe3", "WebSite_Start_Ivt");</script>
+            <img id="Pump_2">
+            <script>fn_SymbolStatus("Pump_2", "Pump2", "WebSite_Start_Ivt");</script>
+            <img id="Pipe_4">
+            <script>fn_SymbolStatus("Pipe_4", "Pipe1", "WebSite_Start_Ivt");</script>
+            <img id="Pipe_5">
+            <script>fn_SymbolStatus("Pipe_5", "Pipe3", "WebSite_Start_Ivt");</script>
+            <img id="Pipe_6">
+            <script>fn_SymbolStatus("Pipe_6", "Pipe2", "WebSite_Start_Ivt");</script>
+            <img id="Flowsensor_1">
+            <script>fn_SymbolStatus("Flowsensor_1", "Flowsensor1", "WebSite_FS_Status");</script>
+        </div>      
+        <br /><br />
+        <div class="status_System" >
+            <h2>STATUS SYSTEM</h2>
+            <br />
+            <label for="lbl_Light_1">RUN : </label>
+            <img id="Light_1"><script> fn_SymbolStatus("Light_1", "Light1", "WebSite_Light_Status") </script> 
+            <br />
+            <br /><br />  
+            <label for="lbl_Light_2">STOP : </label>
+            <img id="Light_2"><script> fn_SymbolStatus("Light_2", "Light2", "WebSite_Light_Status") </script> 
+            <br />
+            <br /><br />
+            <label for="lbl_Light_3">ERROR : </label>
+            <img id="Light_3"><script> fn_SymbolStatus("Light_3", "Light3", "WebSite_Err_Status") </script> 
+            <br />
+        </div>
+        <div class="Switch" >
+            <h2>CONTROL MODE</h2>
+
+            <label class="switch">
+                <input type="checkbox" id="mySwitch">
+                <span class="slider round">
+                    <span class="switch-text on">MAN</span>
+                    <span class="switch-text off">AUTO</span>
+                </span>
+            </label>  
+        </div>
+        <div class="pid_parameters" >
+            <h3>PID Parameters</h3>
+            <!-- //////////////SỬA/LƯU THÔNG SỐ CÀI ĐẶT////////////// -->
+            <!--Các thông số điều chỉnh PID-->   
+            <label>SetPoint: </label>
+            <input id="tbx_SetPoint" disabled="disabled" type="text" />
+            <script>fn_IOFieldDataShow("WebSite_Setpoint", "tbx_SetPoint", 2)</script>
+            <br /><br />                
+            <label>PID Gain: </label>
+            <input id="tbx_PID_Gain" disabled="disabled" type="text" />
+            <script>fn_IOFieldDataShow("WebSite_PID_Gain", "tbx_PID_Gain", 2)</script>
+            <br /><br />
+            <label>PID Ti: </label>
+            <input id="tbx_PID_Ti" disabled="disabled" type="text" />
+            <script>fn_IOFieldDataShow("WebSite_PID_Ti", "tbx_PID_Ti", 2)</script>
+            <br /><br />
+            <label>PID Td: </label>
+            <input id="tbx_PID_Td" disabled="disabled" type="text" />
+            <script>fn_IOFieldDataShow("WebSite_PID_Td", "tbx_PID_Td", 2)</script>
+            <br /><br />
+            <!--Nút nhấn sửa/lưu - Lưu ý: Nút nhấn lưu phải nằm trước nút nhấn sửa-->
+            <button id="btt_scrAuto_Save" onclick="fn_Auto_SaveBtt('btt_scrAuto_Save','btt_scrAuto_Edit')">LƯU</button>
+            <button id="btt_scrAuto_Edit" onclick="fn_Auto_EditBtt('btt_scrAuto_Save','btt_scrAuto_Edit')">SỬA</button>
+            <br /><br />   
+        </div>
+        <div class="control_system" >
+            <h3>Manual Control</h3>
+            <!-- Nút nhấn chạy hệ thống -->
+            <button id="btt_START_SYS" onclick="socket.emit('Client-send-cmdSys', true);">START</button>
+            <!-- Nút nhấn dừng hệ thống -->
+            <button id="btt_STOP_SYS" onclick="socket.emit('Client-send-cmdSys', false);">STOP</button>
+            <br /><br />    
+            <label id="lbl_Man_Frequency" >Frequency: </label>
+            <input id="tbx_Man_Frequency" disabled="disabled" type="text" />
+            <script>fn_IOFieldDataShow2("WebSite_Man_Frequency", "tbx_Man_Frequency", 2)</script>
+            <br /><br />
+            <!--Nút nhấn sửa/lưu - Lưu ý: Nút nhấn lưu phải nằm trước nút nhấn sửa-->
+            <button id="btt_Man_Save" onclick="fn_Man_SaveBtt('btt_Man_Save','btt_Man_Edit');">LƯU</button>
+            <button id="btt_Man_Edit" onclick="fn_Man_EditBtt('btt_Man_Save','btt_Man_Edit');">SỬA</button>
+            <br /><br /> 
+        </div>
+        <div class="OutPut" >
+            <h3>OutPut</h3>
+            <label>PV Pressure: </label>
+            <input id="tbx_PV_Pressure" disabled="disabled" type="text" />
+            <script>fn_IOFieldDataShow("WebSite_PV_Pressure", "tbx_PV_Pressure", 2)</script>
+            <br /><br />    
+            <label>Freq Hz: </label>
+            <input id="tbx_PID_Freq_Hz" disabled="disabled" type="text" />
+            <script>fn_IOFieldDataShow("WebSite_PID_Freq_Hz", "tbx_PID_Freq_Hz", 0)</script>
+            <br /><br />        
+        </div>
+    </div>
+    <!-- //////////////Code cho màn hình 2//////a//////// -->
+    <div id="Screen_2">
+        <div class="look_up_1">
+            <h3>Search</h3>
+            <!--Date time piker-->
+            <label id="lb_Search_Start">From: </label>
+            <input id="dtpk_Search_Start" type="datetime-local">
+            <br /><br />  
+            <label id="lb_Search_End">To: </label>
+            <input id="dtpk_Search_End" type="datetime-local">
+            <br /><br />  
+            <!--Nút tìm kiếm-->
+            <button id="btt_Search" class="btn" onclick="fn_SQL_By_Time();"></i> 
+                <i class="fas fa-search"></i>Search
+            </button>
+            <!--Nút Xuất báo cáo Excel-->
+            <button id="btt_Excel" class="btn" onclick="fn_excel();"></i> 
+                <i class="fas fa-file-export"></i>Export
+            </button>
+        </div>
+        <div class="div_Table_01">
+            <h3>DashBoard</h3>
+            <table id="table_01">   
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>SetPoint</th>
+                        <th>PID Freq Hz</th>
+                        <th>PV Pressure</th>
+                        <th>PID Gain</th>
+                        <th>PID Ti</th>
+                        <th>PID Td</th>                      
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <!-- //////////////Code cho màn hình 3////////////// -->
+    <div id="Screen_3">
+        <div class="look_up_2">
+            <h3>Search</h3>
+            <!--Date time piker-->
+            <label id="lb_Search_Start2">From: </label>
+            <input id="dtpk_Search_Start2" type="datetime-local">
+            <br /><br />  
+            <label id="lb_Search_End2">To: </label>
+            <input id="dtpk_Search_End2" type="datetime-local">
+            <br /><br />  
+            <!--Nút tìm kiếm-->
+            <button id="btt_Search2" class="btn" onclick="fn_SQL2_By_Time();"></i>
+                <i class="fas fa-search"></i>Search
+            </button>
+        </div>
+        <div class="div_Table_02">
+            <h3>Alarm</h3>
+            <table id="table_02">   
+                <thead>
+                    <tr>
+                        <th>DateTime</th>
+                        <th>Event</th>
+                        <th>Class</th>                   
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <!-- //////////////Code cho màn hình 3////////////// -->
+    <div id="Screen_4">
+        <div id="plotly_container" class="trend">
+            <!--REALTIME TREND-->
+            <script>
+                var data_SP_trend = 0;
+                var data_PV_trend = 0;
+        
+                socket.on("WebSite_Setpoint", function (data) {
+                    data_SP_trend = data;
+                });
+                socket.on("WebSite_PV_Pressure", function (data) {
+                    data_PV_trend = data;
+                });
+        
+                Plotly.newPlot('plotly_container', [{
+                    y: [data_SP_trend],
+                    type: 'line',
+                    name: 'SP'
+                }, {
+                    y: [data_PV_trend],
+                    type: 'line',
+                    name: 'PV'
+                }]);
+        
+                var cnt = 0;
+                setInterval(function () {
+                    Plotly.extendTraces('plotly_container', { y: [[data_SP_trend], [data_PV_trend]] }, [0, 1]);
+                    cnt++;
+                    if (cnt > 300) {
+                        Plotly.relayout('plotly_container', {
+                            xaxis: {
+                                range: [cnt - 300, cnt]
+                            }
+                        });
+                    }
+                }, 1000);
+            </script>
+            <div class="trend_pid_parameters" >
+                <h3>PID Parameters</h3>
+                <!-- //////////////SỬA/LƯU THÔNG SỐ CÀI ĐẶT////////////// -->
+                <!--Các thông số điều chỉnh PID-->   
+                <label>SetPoint: </label>
+                <input id="tbx_SetPoint2" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("WebSite_Setpoint", "tbx_SetPoint2", 2)</script>
+                <br /><br />                
+                <label>PID Gain: </label>
+                <input id="tbx_PID_Gain2" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("WebSite_PID_Gain", "tbx_PID_Gain2", 2)</script>
+                <br /><br />
+                <label>PID Ti: </label>
+                <input id="tbx_PID_Ti2" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("WebSite_PID_Ti", "tbx_PID_Ti2", 2)</script>
+                <br /><br />
+                <label>PID Td: </label>
+                <input id="tbx_PID_Td2" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("WebSite_PID_Td", "tbx_PID_Td2", 2)</script>
+                <br /><br />
+            </div>
+            <div class="trend_OutPut" >
+                <h3>OutPut</h3>
+                <label>PV Pressure: </label>
+                <input id="tbx_PV_Pressure2" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("WebSite_PV_Pressure", "tbx_PV_Pressure2", 2)</script>
+                <br /><br />    
+                <label>Freq Hz: </label>
+                <input id="tbx_PID_Freq_Hz2" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("WebSite_PID_Freq_Hz", "tbx_PID_Freq_Hz2", 0)</script>
+                <br /><br />        
+            </div>
+        </div> 
+    </div>
+    <div id="Screen_logout">
+        <h1>Goodbye!</h1>
+        <p>Thank you for visiting.</p>
+        <img src="images/giphy.gif" alt="">
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var sidebar = document.getElementById('slidebar');
+            var isMouseOverSidebar = false;
+            
+            // Function to expand sidebar and show buttons
+            function expandSidebar() {
+                sidebar.classList.remove('collapsed');
+            }
+        
+            // Function to collapse sidebar and hide buttons
+            function collapseSidebar() {
+                sidebar.classList.add('collapsed');
+            }
+        
+            // Event listener for mouse enter (hover in) on sidebar
+            sidebar.addEventListener('mouseenter', function() {
+                isMouseOverSidebar = true;
+                expandSidebar();
+            });
+        
+            // Event listener for mouse leave (hover out) on sidebar
+            sidebar.addEventListener('mouseleave', function() {
+                isMouseOverSidebar = false;
+                setTimeout(function() {
+                    if (!isMouseOverSidebar) {
+                        collapseSidebar();
+                    }
+                }, 200); // Delay collapse to allow time for mouse to leave sidebar area
+            });
+        
+            // Event listener for mouse move inside sidebar
+            sidebar.addEventListener('mousemove', function() {
+                if (!isMouseOverSidebar) {
+                    expandSidebar();
+                }
+            });
+        
+            // Initially collapse the sidebar
+            collapseSidebar();
+        }); 
+
+        fn_SwitchControl('mySwitch', 'WebSite_SW_Man_Auto');
+    </script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+#slidebar {
+    border-radius: 20px;
+    position: fixed;
+    left: 5px;
+    top: 11px;
+    width: 200px;
+    height: 686px;
+    background-color: black;
+    transition: width 0.3s ease;
+}
+#slidebar.collapsed {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+}
+
+#slidebar.collapsed button {
+    display: none;
+}
+
+#slidebar:not(.collapsed) button {
+    display: block;
+}
+
+.slidebar .menu{
+    display: flex;
+    align-items: center;
+    padding: 25px 10px 15px;
+}
+.menu img{
+    width: 43px;
+    border-radius: 50%;
+}
+
+#bttLogin {
+    border-radius: 20px;
+    background-color: #D3D3D3;
+    color: black;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    width: 150px; height: 40px;
+    left: 22px; top: 550px;
+}
+#bttLogin:hover{
+    background-color: #008000;
+}
+
+#bttLogout {
+    border-radius: 20px;
+    background-color: #D3D3D3;
+    color: black;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    width: 150px; height: 40px;
+    left: 22px; top: 600px;
+}
+#bttLogout:hover{
+    background-color: #DC143C;
+}
+
+#btt_Screen_Main {
+    border-radius: 20px;
+    background-color: #D3D3D3;
+    color: black;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    width: 150px; height: 40px;
+    left: 22px; top: 70px;
+}
+#btt_Screen_Main:hover{
+    background-color: #DC143C;
+}
+
+#btt_Screen_1 {
+    border-radius: 20px;
+    background-color: #D3D3D3;
+    color: black;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    width: 150px; height: 40px;
+    left: 22px; top: 120px;
+}
+#btt_Screen_1:hover{
+    background-color: #FFFF00;
+}
+
+#btt_Screen_2 {
+    border-radius: 20px;
+    background-color: #D3D3D3;
+    color: black;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    width: 150px; height: 40px;
+    left: 22px; top: 170px;
+}
+#btt_Screen_2:hover{
+    background-color: #00FFFF;
+}
+
+#btt_Screen_3 {
+    border-radius: 20px;
+    background-color: #D3D3D3;
+    color: black;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    width: 150px; height: 40px;
+    left: 22px; top: 220px;
+}
+#btt_Screen_3:hover{
+    background-color: #FF4500;
+}
+
+#btt_Screen_4 {
+    border-radius: 20px;
+    background-color: #D3D3D3;
+    color: black;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    width: 150px; height: 40px;
+    left: 22px; top: 270px;
+}
+#btt_Screen_4:hover{
+    background-color: #1E90FF;
+}

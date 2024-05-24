@@ -1,0 +1,376 @@
+#plotly_container {
+    width: 950px;
+    height: 750px;
+}
+
+
+/*Màn hình 1*/
+#Screen_1 {
+    position: absolute;
+    left: 215px;
+    top: 180px;
+    width: 1300px;
+    height: 920px;
+    border: 1px solid #000000;
+    background-color: white;
+}
+
+.status_System{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 300px;
+    height: 200px;
+    border: 3px solid #000000;
+    background-color: white; 
+}
+.Switch {
+    position: absolute;
+    top: 220px;
+    right: 10px;
+    width: 300px;
+    height: 80px;
+    border: 3px solid #000000;
+    background-color: white;
+}
+
+.Switch h2 {
+    width: 300px;
+    height: 40px;
+    text-align: center;
+    font-size: 20px;
+    color: #333;
+    border: 1px solid #000000;
+    background-color: white;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+}
+
+.pid_parameters {
+    position: absolute;
+    top: 310px;
+    right: 10px;
+    width: 300px;
+    height: 240px;
+    border: 3px solid #000000;
+    background-color: white;
+}
+
+/*Nút nhấn LƯU PID Parameter*/
+.pid_parameters #btt_scrAuto_Save {
+    border: none;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    width: 120px;
+    height: 40px;
+    left: 100px;
+}
+
+/*Nút nhấn SỬA PID Parameter*/
+.pid_parameters #btt_scrAuto_Edit {
+    border: none;
+    background-color: rgb(255, 0, 0);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    width: 120px;
+    height: 40px;
+    left: 100px;
+}
+
+.pid_parameters h3 {
+    width: 300px;
+    height: 40px;
+    text-align: center;
+    font-size: 20px;
+    color: #333;
+    border: 1px solid #000000;
+    background-color: white;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+}
+
+.pid_parameters 
+#tbx_SetPoint,
+#tbx_PID_Gain,
+#tbx_PID_Ti,
+#tbx_PID_Td {
+    position: absolute;
+    left: 120px;
+    display: inline-block;
+}
+
+.OutPut {
+    position: absolute;
+    top: 800px;
+    right: 10px;
+    width: 300px;
+    height: 105px;
+    border: 3px solid #000000;
+    background-color: white;
+}
+
+.OutPut 
+    #tbx_PV_Pressure,
+    #tbx_PID_Freq_Hz{
+    position: absolute;
+    left: 120px;
+    display: inline-block;  
+}
+.OutPut h3 {
+    width: 300px;
+    height: 40px;
+    text-align: center;
+    font-size: 20px;
+    color: #333;
+    border: 1px solid #000000;
+    background-color: white;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+}
+
+.control_system {
+    position: absolute;
+    top: 560px;
+    right: 10px;
+    width: 300px;
+    height: 220px;
+    border: 3px solid #000000;
+    background-color: white;
+}
+
+/*h3*/
+.control_system h3 {
+    width: 300px;
+    height: 40px;
+    text-align: center;
+    font-size: 20px;
+    color: #333;
+    border: 1px solid #000000;
+    background-color: white;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+}
+
+/*Code css cho nút nhấn*/
+.control_system #btt_START_SYS {
+    border: none;
+    background-color: rgb(0, 255, 0);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    width: 120px;
+    height: 40px;
+    left: 10px;
+    top: 55px;
+}
+
+.control_system #btt_STOP_SYS {
+    border: none;
+    background-color: rgb(255, 0, 0);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    width: 120px;
+    height: 40px;
+    right: 10px;
+    top: 55px;
+}
+
+.control_system #Pump_1 {
+    display: inline-block;
+    position: absolute;
+    top: 65px;
+    left: 5px;
+}
+
+/*Nút nhấn LƯU Frequency*/
+.control_system #btt_Man_Save {
+    border: none;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    width: 120px;
+    height: 40px;
+    top: 160px;
+    left: 100px;
+}
+
+/*Nút nhấn SỬA Frequency*/
+.control_system #btt_Man_Edit {
+    border: none;
+    background-color: rgb(255, 0, 0);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    width: 120px;
+    height: 40px;
+    top: 160px;
+    left: 100px;
+}
+
+.control_system #lbl_Man_Frequency {
+    position: absolute;
+    top: 120px;
+    left: 0px;
+    display: inline-block;
+}
+
+.control_system #tbx_Man_Frequency {
+    position: absolute;
+    top: 120px;
+    left: 120px;
+    display: inline-block;
+}
+
+/*Status System*/
+.status_System h2 {
+    width: 300px;
+    height: 40px;
+    text-align: center;
+    font-size: 20px;
+    color: #333;
+    border: 1px solid #000000;
+    background-color: white;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+}
+.status_System 
+    #Light_1,
+    #Light_2,
+    #Light_3 {
+    display: inline-block;
+    position: absolute;
+    width: 39px;
+    height: 39px;
+}
+
+.status_System 
+    #Light_1, 
+    #lbl_Light_1{
+    top: 51px;
+    left: 150px;
+}
+
+.status_System 
+    #Light_2, 
+    #lbl_Light_2{
+    top: 103px;
+    left: 150px;
+}
+
+.status_System 
+    #Light_3, 
+    #lbl_Light_3{
+    top: 155px;
+    left: 150px;
+}
+
+
+#screen_Control {
+    position: relative; 
+}
+
+#screen_Control img {
+    position: absolute; 
+    width: 800px;
+    height: 700px;
+    top: 90px; 
+    left: 90px; 
+}
+
+#screen_Control #Pipe_1 {
+    position: absolute; 
+    width: 105px;
+    height: 35px;
+    left: 345px;
+    top: 405px;
+}
+
+#screen_Control #Pipe_2 {
+    position: absolute; 
+    width: 40px;
+    height: 65px;
+    left: 275px;
+    top: 570px;
+}
+
+#screen_Control #Pipe_3 {
+    position: absolute; 
+    width: 70px;    
+    height: 70px;
+    left: 275px;
+    top: 405px;
+}
+
+#screen_Control #Pump_2 {
+    position: absolute; 
+    width: 310px;
+    height: 85px;
+    left: 440px;
+    top: 370px;
+}
+
+#screen_Control #Pipe_4 {
+    position: absolute; 
+    width: 300px;
+    height: 35px;
+    left: 550px;
+    top: 260px;
+}
+
+#screen_Control #Pipe_5 {
+    position: absolute; 
+    width: 70px;    
+    height: 70px;
+    left: 480px;
+    top: 260px;
+}
+
+#screen_Control #Pipe_6 {
+    position: absolute; 
+    width: 37px;
+    height: 40px;
+    left: 480px;
+    top: 330px;
+}
+
+#screen_Control #Flowsensor_1 {
+    position: absolute; 
+    width: 110px;
+    height: 65px;
+    left: 520px;
+    top: 260px;
+}
